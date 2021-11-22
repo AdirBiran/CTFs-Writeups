@@ -6,6 +6,7 @@ easy
 22.11.2021
 
 ### Enumeration
+##### Nmap
 <img width="378" alt="1-nmap" src="https://user-images.githubusercontent.com/21021400/142859505-5c1f5863-cea4-4c9c-96dc-828f0f02158c.png">
 
 editing hosts file with the domain
@@ -14,17 +15,21 @@ editing hosts file with the domain
 checking the website leads to login page
 <img width="725" alt="2-website" src="https://user-images.githubusercontent.com/21021400/142859542-43713304-eea0-48cf-a54e-e8cfc3497508.png">
 
+##### Gobuster
 running gobuster twice:
 once with directory search
+
 <img width="336" alt="3-gobuster-dir" src="https://user-images.githubusercontent.com/21021400/142859648-7cf44fee-6f1a-4faf-86dd-828e2a52a1c9.png">
 
 
 second with .php extensions search
+
 <img width="356" alt="4-gobuster-php" src="https://user-images.githubusercontent.com/21021400/142859650-bebf7991-e9c9-45ad-8811-b3820a31a523.png">
 
 assets directory did not lead to something interesting
 uploads directory wasn't reachable
 inc directory had a few php files, thought nothing useful.
+
 <img width="252" alt="5-inc-dir" src="https://user-images.githubusercontent.com/21021400/142859652-152fabf7-7021-470f-ad30-c016bd491966.png">
 
 
@@ -34,21 +39,23 @@ we will try reach index.php file with the help of burpsuite.
 Opened burpsuite, turned on foxyproxy and entered
 http://bank.htb/index.php to intercept the request and response.
 in burpsuite we will intercept the response to this request and forward the request.
+
 <img width="393" alt="6-burp" src="https://user-images.githubusercontent.com/21021400/142859653-59d796df-20ae-4a86-a764-4c7f82b30576.png">
 
 
 changing the 302 to 200 in the reponse and forwarding it, will result in the following index.php page on the web:
+
 <img width="559" alt="7-burp" src="https://user-images.githubusercontent.com/21021400/142859654-8a908c6e-284d-4996-8f75-952f9b3d4eb1.png">
 <img width="325" alt="8-index" src="https://user-images.githubusercontent.com/21021400/142859655-a1dd2582-654e-4a51-8a64-1d9fcc8ac00a.png">
 
 
-
 not much to see here, but following this method we of changing the 302 status to 200 we'll investigate the support.php file as well.
+
 <img width="180" alt="9-support" src="https://user-images.githubusercontent.com/21021400/142859757-8fe484c9-6ccc-481d-b439-b20ac0ed070a.png">
 
 we reached a page which contains a file upload, so lets try get a reverse php shell.
-<img width="172" alt="10-shell" src="https://user-images.githubusercontent.com/21021400/142859759-477bfd5e-b1a5-4c05-84c3-a71be6d75b38.png">
 
+<img width="172" alt="10-shell" src="https://user-images.githubusercontent.com/21021400/142859759-477bfd5e-b1a5-4c05-84c3-a71be6d75b38.png">
 
 ### Exploitation
 
