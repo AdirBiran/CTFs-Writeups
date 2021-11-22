@@ -16,6 +16,10 @@ Date: 22.11.2021
 Editing hosts file with the domain
 10.10.10.29	bank.htb
 
+<p align="center">
+<img width="144" alt="1-hosts" src="https://user-images.githubusercontent.com/21021400/142862369-0dc6daa0-bd2e-4781-96e2-56f8bc6762b7.png">
+</p>
+
 Checking the website leads to login page.
 
 <p align="center">
