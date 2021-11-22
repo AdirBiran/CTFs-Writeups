@@ -48,8 +48,8 @@ inc directory had a few php files, thought nothing useful.
 <img width="252" alt="5-inc-dir" src="https://user-images.githubusercontent.com/21021400/142859652-152fabf7-7021-470f-ad30-c016bd491966.png">
 </p>
 
-Trying to investigate the php files from the gobuster results,  
-we will try reach index.php file with the help of Burpsuite.
+Trying to investigate the php files from the gobuster results.  
+We will try reach index.php file with the help of Burpsuite.
 
 Opening Burpsuite, turning on FoxyProxy on the browser and entering http://bank.htb/index.php to intercept the request and response.  
 Inside Burpsuite, intercepting the response to this request and forwarding it.
