@@ -1,8 +1,11 @@
+# Bank
+
+### Machine Information
 bank
 easy
 22.11.2021
 
-enumeration
+### Enumeration
 *1
 
 editing hosts file with the domain
@@ -38,7 +41,7 @@ not much to see here, but following this method we of changing the 302 status to
 we reached a page which contains a file upload, so lets try get a reverse php shell.
 10*
 
-exploitation
+### Exploitation
 
 apparantly the php extension is not allowed to upload.
 *11
@@ -56,7 +59,7 @@ lets open a netcat listener and nevigate to bank.htb/uploads/shell.htb to execut
 and we're in as www-data
 *15
 
-privilege escelation
+### Privilege Escelation
 after basic manual enumeration of suid files, executables, crontab and a few more, decided to run linpeas for faster results.
 getting linpeas from the local machine to the /tmp directory and chaning its permissions.
 *16
