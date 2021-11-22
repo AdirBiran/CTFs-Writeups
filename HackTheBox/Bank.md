@@ -1,12 +1,9 @@
 # Bank
 
 ### Basic Information
-Machine name: Bank
-
-IP: 10.10.10.29
-
-Written by: Adir Biran
-
+Machine name: Bank  
+IP: 10.10.10.29  
+Written by: Adir Biran  
 Date: 22.11.2021
 
 ### Enumeration
