@@ -6,8 +6,8 @@ IP: 10.10.10.29
 Written by: Adir Biran  
 Date: 22.11.2021
 
-### Enumeration
-##### Nmap
+## Enumeration
+#### Nmap
 
 <p align="center">
 <img width="378" alt="1-nmap" src="https://user-images.githubusercontent.com/21021400/142859505-5c1f5863-cea4-4c9c-96dc-828f0f02158c.png">
@@ -26,7 +26,7 @@ Checking the website leads to login page.
 <img width="725" alt="2-website" src="https://user-images.githubusercontent.com/21021400/142859542-43713304-eea0-48cf-a54e-e8cfc3497508.png">
 </p>
 
-##### Gobuster
+#### Gobuster
 Running gobuster twice:
 Once with directory search
 
@@ -40,18 +40,18 @@ Second with .php extensions search
 <img width="356" alt="4-gobuster-php" src="https://user-images.githubusercontent.com/21021400/142859650-bebf7991-e9c9-45ad-8811-b3820a31a523.png">
 </p>
 
-assets directory did not lead to something interesting.
-uploads directory wasn't reachable.
+assets directory did not lead to something interesting.  
+uploads directory wasn't reachable.  
 inc directory had a few php files, thought nothing useful.
 
 <p align="center">
 <img width="252" alt="5-inc-dir" src="https://user-images.githubusercontent.com/21021400/142859652-152fabf7-7021-470f-ad30-c016bd491966.png">
 </p>
 
-Trying to investigate the php files from the gobuster results,
+Trying to investigate the php files from the gobuster results,  
 we will try reach index.php file with the help of Burpsuite.
 
-Opening Burpsuite, turning on FoxyProxy on the browser and entering http://bank.htb/index.php to intercept the request and response.
+Opening Burpsuite, turning on FoxyProxy on the browser and entering http://bank.htb/index.php to intercept the request and response.  
 Inside Burpsuite, intercepting the response to this request and forwarding it.
 
 <p align="center">
@@ -82,7 +82,7 @@ Reaching a page which contains a file upload, so let's try get a reverse php she
 <img width="172" alt="10-shell" src="https://user-images.githubusercontent.com/21021400/142859759-477bfd5e-b1a5-4c05-84c3-a71be6d75b38.png">
 </p>
 
-### Exploitation
+## Exploitation
 
 Apparantly the php extension is not allowed.
 
@@ -116,8 +116,8 @@ Let's open a netcat listener and navigate to bank.htb/uploads/shell.htb to execu
 
 And we're in as www-data.
 
-### Privilege Escelation
-After basic manual enumeration of suid files, executables, crontab and a few more, decided to run linpeas for faster results.
+## Privilege Escelation
+After basic manual enumeration of suid files, executables, crontab and a few more, decided to run linpeas for faster results.  
 Getting linpeas from the local machine to the /tmp directory and chaning its permissions.
 
 <p align="center">
@@ -136,14 +136,14 @@ Checking the file permissions:
 <img width="215" alt="18-passwd-permissions" src="https://user-images.githubusercontent.com/21021400/142859884-0df62423-2247-4216-8cd2-c5394ee7380f.png">
 </p>
 
-On the local machine creating a password for the /etc/passwd file using the command:
+On the local machine creating a password for the /etc/passwd file using the command:  
 perl -le 'print crypt("pass", "anything")'
 
 <p align="center">
 <img width="186" alt="20-pass-generate" src="https://user-images.githubusercontent.com/21021400/142859890-183578c3-69f6-4368-8000-882899969e37.png">
 </p>
 
-Adding the new root user through the /etc/passwd file:
+Adding the new root user through the /etc/passwd file:  
 echo "root2:an5CaYOk82Zq6:0:0:root2:/root:/bin/bash" >> /etc/passwd
 
 <p align="center">
