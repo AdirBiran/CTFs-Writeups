@@ -6,7 +6,7 @@ easy
 22.11.2021
 
 ### Enumeration
-![]("https://user-images.githubusercontent.com/21021400/142858477-b4813bcd-00c0-4ead-b92e-e8a8d311c20d.png")
+![](https://user-images.githubusercontent.com/21021400/142858477-b4813bcd-00c0-4ead-b92e-e8a8d311c20d.png)
 
 editing hosts file with the domain
 10.10.10.29	bank.htb
