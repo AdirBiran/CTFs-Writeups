@@ -44,8 +44,7 @@ Second with .php extensions search
 </p>
 
 assets directory did not lead to something interesting.
-uploads directory wasn't reachable
-
+uploads directory wasn't reachable.
 inc directory had a few php files, thought nothing useful.
 
 <p align="center">
