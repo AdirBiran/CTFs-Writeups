@@ -21,7 +21,7 @@ checking the website leads to login page
 running gobuster twice:
 once with directory search
 
-<img width="336" alt="3-gobuster-dir" src="https://user-images.githubusercontent.com/21021400/142859648-7cf44fee-6f1a-4faf-86dd-828e2a52a1c9.png">
+<img width="336" text-align="center" alt="3-gobuster-dir" src="https://user-images.githubusercontent.com/21021400/142859648-7cf44fee-6f1a-4faf-86dd-828e2a52a1c9.png">
 
 second with .php extensions search
 
