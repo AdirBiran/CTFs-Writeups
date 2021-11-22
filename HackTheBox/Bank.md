@@ -49,7 +49,7 @@ inc directory had a few php files, thought nothing useful.
 </p>
 
 Trying to investigate the php files from the gobuster results.  
-We will try reach index.php file with the help of Burpsuite.
+We will try to reach index.php file with the help of Burpsuite.
 
 Opening Burpsuite, turning on FoxyProxy on the browser and entering http://bank.htb/index.php to intercept the request and response.  
 Inside Burpsuite, intercepting the response to this request and forwarding it.
