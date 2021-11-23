@@ -5,7 +5,7 @@
 Machine name: Armageddon  
 IP: 10.10.10.233  
 Written by: Adir Biran  
-Date: 23.11.2021
+Date: 23.11.2021  
 Tools used: Nmap, Gobuster, Metasploit, hashcat, snap  
 
 ## Enumeration
