@@ -42,17 +42,17 @@ Checking sites/default directory:
 <img width="233" alt="4-1-sites-default" src="https://user-images.githubusercontent.com/21021400/143077276-89711a37-2fdd-4352-9844-7799687e7b0a.png">
 </p>
 
-The settings file look interesting but can't read them (yet).  
+The settings files look interesting but can't read them (yet).  
 We will get back to them later.
 
 ## Exploitation
 
-Searchsploit:
+Searchsploit:  
 <p align="center">
 <img width="496" alt="5-searchsploit" src="https://user-images.githubusercontent.com/21021400/143077281-963ca05f-ff49-4c01-a70a-4e3fd2720858.png">
 </p>
 
-Metasploit:
+Metasploit:  
 <img width="561" alt="6-metasploitsearch" src="https://user-images.githubusercontent.com/21021400/143077285-2b3bdb33-9dd8-4530-bba4-44f1d6706269.png">
 <p align="center">
 </p>
