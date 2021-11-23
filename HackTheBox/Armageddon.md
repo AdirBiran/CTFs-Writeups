@@ -138,7 +138,7 @@ Checking the hash type on https://hashcat.net/wiki/doku.php?id=example_hashes
 </p>
 
 Hash type is drupal 7, code 7900 for hashcat.  
-Copied the hash to a "hash" file and using rockyou password list with hashcat.  
+Copying the hash to a "hash" file and using rockyou password list with hashcat.  
 <p align="center">
 <img width="226" alt="16-hashcatcommand" src="https://user-images.githubusercontent.com/21021400/143077244-d745d062-e667-4cae-8f45-5fb706117a49.png">
 </p>
