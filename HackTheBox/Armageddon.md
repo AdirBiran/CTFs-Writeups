@@ -100,7 +100,7 @@ We got the mysql credentials:
 user: drupaluser  
 password: CQHEy@9M*m23gBVj  
 
-Terminal is non-interactive, better shown results with inline commands.  
+Terminal is non-interactive, better show results with inline commands.  
 
 Show the databases:  
 **mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "show databases;"**  
