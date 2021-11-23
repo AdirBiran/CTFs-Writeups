@@ -5,7 +5,7 @@ Machine name: Bank
 IP: 10.10.10.29  
 Written by: Adir Biran  
 Date: 22.11.2021  
-Tools used: Nmap, Gobuster
+Tools used: Nmap, Gobuster, Burpsuite, Linpeas
 
 ## Enumeration
 #### Nmap
