@@ -47,14 +47,14 @@ We will get back to them later.
 
 ## Exploitation
 
-Searchsploit:  
+Searchsploit:
 <p align="center">
 <img width="496" alt="5-searchsploit" src="https://user-images.githubusercontent.com/21021400/143077281-963ca05f-ff49-4c01-a70a-4e3fd2720858.png">
 </p>
 
-Metasploit:  
-<img width="561" alt="6-metasploitsearch" src="https://user-images.githubusercontent.com/21021400/143077285-2b3bdb33-9dd8-4530-bba4-44f1d6706269.png">
+Metasploit:
 <p align="center">
+<img width="561" alt="6-metasploitsearch" src="https://user-images.githubusercontent.com/21021400/143077285-2b3bdb33-9dd8-4530-bba4-44f1d6706269.png">
 </p>
 
 Using the second on the list (index number 1).  
