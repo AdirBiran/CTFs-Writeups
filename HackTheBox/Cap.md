@@ -5,8 +5,9 @@
 Machine name: Cap  
 IP: 10.10.10.245  
 Written by: Adir Biran  
-Date: 27.11.2021  
 Tools used: Nmap, Gobuster, Wireshark
+Method: Enumerating the services and the website to get initial credentials using Wireshark.  
+Exploiting the machine using the retrieved credentials and escalating to root using capabilities.  
 
 ## Enumeration
 #### Nmap
