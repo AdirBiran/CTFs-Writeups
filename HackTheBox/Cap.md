@@ -12,10 +12,9 @@ Tools used: Nmap, Gobuster, Wireshark
 #### Nmap
 
 <p align="center">
-  
-</p>
-<p align="center"/>
 ![2-gobuster](https://user-images.githubusercontent.com/21021400/143682097-52c24060-05d4-48a3-8bce-95f1cf66dabc.png)
+  </p>
+  
 
 Ports open: 21 (FTP), 22 (SSH) and 80 (HTTP)
 
