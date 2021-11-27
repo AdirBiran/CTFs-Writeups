@@ -11,8 +11,27 @@ Tools used: Nmap, Gobuster, Wireshark
 ## Enumeration
 #### Nmap
 
+
+![8-wireshark](https://user-images.githubusercontent.com/21021400/143682399-3646c0f9-c34c-4372-b7ef-fef555736f2f.png)
+![9-ftp-user](https://user-images.githubusercontent.com/21021400/143682401-3887eb6e-831e-46f0-a6df-929b8cf4f8d2.png)
+![10-ssh](https://user-images.githubusercontent.com/21021400/143682402-7598bb5b-00d3-4604-9af7-b060e30f4e46.png)
+![11-id](https://user-images.githubusercontent.com/21021400/143682403-ec718a03-4f59-4965-b7e5-0067ff9a4717.png)
+![12-suid](https://user-images.githubusercontent.com/21021400/143682404-0cd16c9e-afac-4b46-a6f3-cfe65296830f.png)
+![13-sudo](https://user-images.githubusercontent.com/21021400/143682405-cc9fe751-4b65-41de-9751-a060518efa2d.png)
+![14-caps](https://user-images.githubusercontent.com/21021400/143682406-e061b04b-759a-4a03-86bc-b10cc294e976.png)
+![15-capsetuid](https://user-images.githubusercontent.com/21021400/143682407-167ee65e-07b8-45c9-b321-913f7d9bd9a2.png)
+![16-root](https://user-images.githubusercontent.com/21021400/143682408-21ad767e-a812-4652-9b38-3f1830e260b5.png)
+![2-gobuster](https://user-images.githubusercontent.com/21021400/143682410-f2fa7d07-e971-4498-8106-204330b81324.png)
+![3-dashboard](https://user-images.githubusercontent.com/21021400/143682411-936ff350-1aa6-4b66-8914-02b18fb47ca7.png)
+![4-ip](https://user-images.githubusercontent.com/21021400/143682412-835abd77-0bc3-4910-90c7-b8bd75eeed0d.png)
+![5-netstat](https://user-images.githubusercontent.com/21021400/143682413-b581606c-0b19-493b-ba8f-58b799f05d0e.png)
+![6-wireshark4](https://user-images.githubusercontent.com/21021400/143682414-a44323fd-cc99-4313-83d3-325d9bca6548.png)
+![7-wireshark0](https://user-images.githubusercontent.com/21021400/143682415-2a8146af-3021-428f-b692-55dcf5ca21d3.png)
+
+
+
 <p align="center">
-![1-nmap](https://user-images.githubusercontent.com/21021400/143682096-24b2acea-f977-4b88-b579-9e4a0a744af5.png)
+![1-nmap](https://user-images.githubusercontent.com/21021400/143682409-919d248d-fd73-4595-96f3-b38989bd1bcd.png)
 </p>
 
 Ports open: 21 (FTP), 22 (SSH) and 80 (HTTP)
