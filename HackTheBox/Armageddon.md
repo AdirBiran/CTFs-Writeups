@@ -2,11 +2,12 @@
 # Armageddon
 
 ### Basic Information
-Machine name: Armageddon  
-IP: 10.10.10.233  
-Written by: Adir Biran  
-Date: 23.11.2021  
-Tools used: Nmap, Gobuster, Metasploit, hashcat, snap  
+**Machine name:** Armageddon  
+**IP:** 10.10.10.233  
+**Written by:** Adir Biran  
+**Tools:** Nmap, Gobuster, Metasploit, hashcat, snap  
+**Method:** Enumerating the website for services and versions and exploiting using Metasploit.  
+Finding credentials in configurations file and escalating to root by abusing snap.
 
 ## Enumeration
 #### Nmap
