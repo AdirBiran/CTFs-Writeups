@@ -232,7 +232,7 @@ edit the file /etc/mysql/mariadb.conf.d/50-server.cnf and set bind-address = 0.0
 </p>
 
 Restart the mysql service:  
-systemctl restart mysql    
+sudo systemctl restart mysql    
 
 Login using the local machine's IP, credentials for db and db's name created previously.  
 <p align="center">
