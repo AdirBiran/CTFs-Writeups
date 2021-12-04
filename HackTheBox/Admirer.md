@@ -325,7 +325,7 @@ First, lets create the shutil.py file in /tmp:
 When we will run admin_tasks.sh as sudo with #6 command, the backup.py file will be executed.  
 Once executed, it will look for make_archive function from shutil.py that we located in /tmp, which will result in adding SUID to /bin/bash.  
 
-Lhe last step is running the admin_tasks.sh as sudo with #6 and passing /tmp directory as PYTHONPATH:  
+The last step is running the admin_tasks.sh as sudo with #6 and passing /tmp directory as PYTHONPATH:  
 sudo PYTHONPATH=/tmp /opt/scripts/admin_tasks.sh 6  
 <p align="center">
 <img width="265" alt="46" src="https://user-images.githubusercontent.com/21021400/144714189-a873eff9-55b9-42c4-99b3-9ad7d13f1200.png">
