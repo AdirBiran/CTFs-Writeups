@@ -176,6 +176,8 @@ Tried all the credentials retrieved so far, nothing worked though.
 
 Adminer version is 4.6.2  
 
+## Exploitation
+
 A search on google lead to this article about file disclosure vulnerability:  
 https://www.acunetix.com/vulnerabilities/web/adminer-4-6-2-file-disclosure-vulnerability/  
 <p align="center">
