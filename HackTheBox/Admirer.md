@@ -4,9 +4,9 @@
 **Machine name:** Admirer  
 **IP:** 10.10.10.187  
 **Written by:** Adir Biran  
-**Tools:** Nmap, Gobuster, MySQL
-**Method:** 
-
+**Tools:** Nmap, Gobuster, MySQL  
+**Method:** Enumerating the services to get credentials for FTP and investigating the files for a CVE.  
+Gaining initial access to the machine through SSH and escalating privileges with library hijacking attack.  
 
 
 ## Enumeration
