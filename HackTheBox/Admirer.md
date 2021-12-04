@@ -245,7 +245,7 @@ and we're in.
 <img width="534" alt="34" src="https://user-images.githubusercontent.com/21021400/144714158-23d21294-c53a-4c6c-a7a4-200367814ff4.png">
 </p>
 
-Navigating to the SQL Command button on the top left and executing the following command to read /etc/passwd as a POC:  
+Navigating to the SQL Command button on the top left and executing the following command to read /etc/passwd as POC:  
 LOAD DATA local INFILE '/etc/passwd' INTO TABLE getfile fields TERMINATED BY "\n";  
 <p align="center">
 <img width="336" alt="35" src="https://user-images.githubusercontent.com/21021400/144714159-153355b2-4193-4ae9-8ed8-2392dba65a5c.png">
