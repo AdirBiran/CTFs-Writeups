@@ -5,7 +5,8 @@
 **IP:** 10.10.10.194  
 **Written by:** Adir Biran  
 **Tools:** Nmap, Gobuster, msfvenom, zip2john, john, lxd  
-**Method:** 
+**Method:** Enumerating the various services on the machine and gaining credentials with LFI attack.  
+Escalating the privileges once by password cracking a protected zip file and second time by exploiting lxd group.  
 
 ## Enumeration
 
