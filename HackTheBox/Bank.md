@@ -1,14 +1,20 @@
 # Bank
 
-### Basic Information
-**Machine name:** Bank  
-**IP:** 10.10.10.29  
-**Written by:** Adir Biran  
-**Tools and Techniques:** Nmap, Gobuster, Burpsuite, Linpeas, Status Codes bypassing, Filter bypassing, Writeable passwd file    
-**Method:** Enumerating the website and the services, using Burpsuite to bypass status codes.  
+## Basic Information 
+
+|          |  |
+| :---                 |     :---:      |
+| Machine Name         | Bank     |
+| Written by           | Adir Biran       |
+| IP Address           | 10.10.10.29       |
+| Tools and Techniques | Nmap, Gobuster, Burpsuite, Linpeas, Filter bypassing, Misconfiguration       |
+
+## Method
+Enumerating the website and the services, using Burpsuite to bypass status codes.  
 Uploading a reverse shell after bypassing extensions filters and escalating to root by writing to /etc/passwd file.  
 
 ## Enumeration
+
 #### Nmap
 
 <p align="center">
