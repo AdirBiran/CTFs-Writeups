@@ -5,7 +5,7 @@
 **Machine name:** Cap  
 **IP:** 10.10.10.245  
 **Written by:** Adir Biran  
-**Tools:** Nmap, Gobuster, Wireshark  
+**Tools and Techniques:** Nmap, Gobuster, Wireshark, Capabilities  
 **Method:** Enumerating the services and the website to get initial credentials using Wireshark.  
 Exploiting the machine using the retrieved credentials and escalating to root using capabilities.  
 
@@ -109,7 +109,9 @@ Tried as well searching the machine for log and backups files, cron jobs, writea
 
 At last, the method that worked successfully was capabilities.  
 Checking capabilities files on the system using the command:  
-**getcap -r / 2>/dev/null**  
+```
+getcap -r / 2>/dev/null  
+```
 <p align="center">
 <img src="https://user-images.githubusercontent.com/21021400/143682112-7bc0a356-3cf1-4afc-b2f7-8c70893d053c.png")
 </p>
@@ -126,7 +128,9 @@ After researching google how we can abuse this capability of python to escalate 
 https://www.hackingarticles.in/linux-privilege-escalation-using-capabilities/  
 
 All left is typing the following command:  
-**/usr/bin/python3.8 -c "import os; os.setuid(0); os.system('/bin/bash')"**  
+```
+/usr/bin/python3.8 -c "import os; os.setuid(0); os.system('/bin/bash')"  
+```
 <p align="center">
 <img src="https://user-images.githubusercontent.com/21021400/143682115-b05f1b0a-afed-4bba-b9d5-f2dfeae65623.png")
 </p>
