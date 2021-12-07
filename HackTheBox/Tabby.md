@@ -1,12 +1,18 @@
 # Tabby
 
-### Basic Information
-**Machine name:** Tabby  
-**IP:** 10.10.10.194  
-**Written by:** Adir Biran  
-**Tools and Techniques:** Nmap, Gobuster, msfvenom, zip2john, john, lxd, Local File Inclusion  
-**Method:** Enumerating the various services on the machine and gaining credentials with LFI attack.  
-Escalating the privileges once by password cracking a protected zip file and second time by exploiting lxd group.  
+## Basic Information
+
+|          |  |
+| :---                 |     :---:      |
+| Machine Name         | Tabby     |
+| Written by           | Adir Biran       |
+| IP Address           | 10.10.10.194       |
+| Tools and Techniques | Nmap, Gobuster, msfvenom, zip2john, john, lxd, Local File Inclusion       |
+
+## Method
+
+Enumerating the various services on the machine and gaining credentials with LFI attack.  
+Escalating the privileges once by password cracking a protected zip file and second time by exploiting lxd group. 
 
 ## Enumeration
 
