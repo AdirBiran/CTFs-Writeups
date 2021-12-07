@@ -41,7 +41,7 @@ The website - Port 80
 
 Found a mail address info@doctors.htb  
 
-Add doctors.htb to hosts file  
+Added doctors.htb to hosts file  
 <p align="center">
 <img width="114" alt="5" src="https://user-images.githubusercontent.com/21021400/145070379-9a2f8959-a692-417a-87e0-3f431c6ace05.png">
 </p>
