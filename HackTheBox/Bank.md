@@ -4,7 +4,7 @@
 **Machine name:** Bank  
 **IP:** 10.10.10.29  
 **Written by:** Adir Biran  
-**Tools:** Nmap, Gobuster, Burpsuite, Linpeas  
+**Tools and Techniques:** Nmap, Gobuster, Burpsuite, Linpeas, Status Codes bypassing, Filter bypassing, Writeable passwd file    
 **Method:** Enumerating the website and the services, using Burpsuite to bypass status codes.  
 Uploading a reverse shell after bypassing extensions filters and escalating to root by writing to /etc/passwd file.  
 
@@ -119,6 +119,7 @@ Let's open a netcat listener and navigate to bank.htb/uploads/shell.htb to execu
 And we're in as www-data.
 
 ## Privilege Escelation
+
 After basic manual enumeration of suid files, executables, crontab and a few more, decided to run linpeas for faster results.  
 Getting linpeas from the local machine to the /tmp directory and chaning its permissions.
 
