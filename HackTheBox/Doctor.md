@@ -1,13 +1,17 @@
 # Doctor
 
-### Basic Information
-**Machine name:** Doctor  
-**IP:** 10.10.10.209  
-**Written by:** Adir Biran  
-**Tools and Techniques:** Nmap, Gobuster, SSTI, Misconfiguration, Data leakage, CVE  
-**Method:** Enumerating the various services, exploiting SSTI vulnerability to get access on the machine.  
-Escalting privileges once with group misconfiguration and leaked password on log files and second time with splunk exploit.  
+## Basic Information 
 
+|          |  |
+| :---                 |     :---:      |
+| Machine Name         | Doctor     |
+| Written by           | Adir Biran       |
+| IP Address           | 10.10.10.209       |
+| Tools and Techniques | Nmap, Gobuster, SSTI, Misconfiguration, Data leakage, CVE       |
+
+## Method
+Enumerating the various services, exploiting SSTI vulnerability to get access on the machine.  
+Escalting privileges once with group misconfiguration and leaked password on log files and second time with splunk exploit.       
 
 ## Enumeration
 
