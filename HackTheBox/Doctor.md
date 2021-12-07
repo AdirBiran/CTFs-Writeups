@@ -146,28 +146,32 @@ First, we'll copy the whole line to a file and remove the begining and tailing t
 </p>
 
 As we can see its a long list with HTML entities:  
-&lt; represents "lower than" <  
+\&lt; represents "lower than" <  
 *gt; represents "greater than" >  
-&#39; represents '  
+\&#39; represents '  
 
 We will use sed to find and replaces all occurences of the HTML entities.
+
+replace all \&lt; occurrences with <  
 ```
 sed 's/&lt;/</g'  
 ```
-replace all &lt; occurrences with <  
-
-replace all the "&gt;" occurrences with >  
+                                        
+replace all \&gt; occurrences with >  
 ```
 sed 's/&gt;/>/g'  
 ```
-replace all "&#39;" occurences with '  
+ 
+replace all \&#39; occurences with '  
 ```
 sed "s/&#39;/'/g"  
 ```
-replacing all the commas with new lines  
+ 
+replace all commas with new lines  
 ```
 sed "s/, /\n/g"  
 ```
+ 
 Combining the 4 together:  
 ```
 cat results | sed 's/&gt;/>/g' | sed 's/&lt;/</g' | sed "s/&#39;/'/g" | sed "s/, /\n/g"  
