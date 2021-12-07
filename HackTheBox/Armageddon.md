@@ -1,15 +1,21 @@
 
 # Armageddon
 
-### Basic Information
-**Machine name:** Armageddon  
-**IP:** 10.10.10.233  
-**Written by:** Adir Biran  
-**Tools and Techniques:** Nmap, Gobuster, Metasploit, hashcat, snap, CVE  
-**Method:** Enumerating the website for services and versions and exploiting using Metasploit.  
+## Basic Information 
+
+|          |  |
+| :---                 |     :---:      |
+| Machine Name         | Argmageddon     |
+| Written by           | Adir Biran       |
+| IP Address           | 10.10.10.233       |
+| Tools and Techniques | Nmap, Gobuster, Metasploit, hashcat, snap, CVE       |
+
+## Method
+Enumerating the website for services and versions and exploiting using Metasploit.  
 Finding credentials in configurations file and escalating to root by abusing snap.
 
 ## Enumeration
+
 #### Nmap
 
 <p align="center">
