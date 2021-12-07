@@ -1,15 +1,22 @@
 
 # Cap
 
-### Basic Information
-**Machine name:** Cap  
-**IP:** 10.10.10.245  
-**Written by:** Adir Biran  
-**Tools and Techniques:** Nmap, Gobuster, Wireshark, Capabilities  
-**Method:** Enumerating the services and the website to get initial credentials using Wireshark.  
+## Basic Information 
+
+|          |  |
+| :---                 |     :---:      |
+| Machine Name         | Cap     |
+| Written by           | Adir Biran       |
+| IP Address           | 10.10.10.245       |
+| Tools and Techniques | Nmap, Gobuster, Wireshark, Capabilities       |
+
+## Method
+Enumerating the services and the website to get initial credentials using Wireshark.  
 Exploiting the machine using the retrieved credentials and escalating to root using capabilities.  
 
+
 ## Enumeration
+
 #### Nmap
 
 <p align="center">
