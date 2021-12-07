@@ -1,13 +1,18 @@
 # Frolic
 
-### Basic Information
-**Machine name:** Frolic  
-**IP:** 10.10.10.111  
-**Written by:** Adir Biran  
-**Tools and Techniques:** Nmap, Gobuster, fcrackzip, Metasploit, gdb, Buffer Overflow, CVE, Cryptography  
-**Method:** Enumerating the web services, gaining initial access by decoding and deciphering multiple strings accross the website.  
-Exploitating a CVE with metasploit and escalating privileges to root user by a Return-to-libc buffer overflow technique.  
+## Basic Information 
 
+|          |  |
+| :---                 |     :---:      |
+| Machine Name         | Frolic     |
+| Written by           | Adir Biran       |
+| IP Address           | 10.10.10.111       |
+| Tools and Techniques | Nmap, Gobuster, fcrackzip, Metasploit, gdb, Buffer Overflow, CVE, Cryptography       |
+
+## Method
+
+Enumerating the web services, gaining initial access by decoding and deciphering multiple strings accross the website.  
+Exploitating a CVE with metasploit and escalating privileges to root user by a Return-to-libc buffer overflow technique. 
 
 ## Enumeration
 #### Nmap
