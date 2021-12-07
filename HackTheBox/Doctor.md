@@ -11,7 +11,6 @@ Escalting privileges once with group misconfiguration and leaked password on log
 
 ## Enumeration
 
-
 #### Nmap
 <p align="center">
 <img width="386" alt="1" src="https://user-images.githubusercontent.com/21021400/145070363-e36e0a87-2d84-470a-b568-ee3e714e79ae.png">
@@ -103,6 +102,8 @@ After enumerating and looking back at /archive, even though the page is blank, w
 <p align="center">
 <img width="317" alt="12" src="https://user-images.githubusercontent.com/21021400/145070399-473708ab-1a3c-44aa-803e-c2cb47dfe3e4.png">
 </p>
+
+## Exploitation
 
 Found this article about SSTI on Jinja2/Flask.  
 https://medium.com/@nyomanpradipta120/ssti-in-flask-jinja2-20b068fdaeee  
@@ -249,6 +250,8 @@ Opened netcat on port 1234 and injected the following command:
 
 We're in as web.  
 
+## Privilege Escalation (web -> shaun)
+  
 Other users on the machine:  
 <p align="center">
 <img width="263" alt="23-2" src="https://user-images.githubusercontent.com/21021400/145070418-5d076fde-dccd-4d23-b7df-3c370cdd5600.png">
@@ -278,6 +281,8 @@ Tried login to the other users
 
 splunk failed but shaun succeed with Guitar123 as the password.  
 
+## Privilege Escalation (shaun -> root)
+  
 After checking several methods to escalate to root (that failed), decided to try those credentials on the website on port 8089 from earlier.  
 <p align="center">
 <img width="394" alt="28" src="https://user-images.githubusercontent.com/21021400/145070429-2262b2d4-229a-47ff-82d8-26d396c41aee.png">
