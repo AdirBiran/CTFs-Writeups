@@ -10,6 +10,8 @@
 | Tools and Techniques | Nmap, Gobuster, nslookup, dig, SQL Injection, Command Injection, Cronjobs       |
 
 ## Method
+Enumerating the services and virtual hosts for a login page, exploiting it using SQL injection and getting access with OS Command Injection.  
+Escalating the privileges by abusing a cron job.  
 
 ## Enumeration
 
@@ -65,16 +67,19 @@ Added them to /etc/hosts
 </p>
 
 cronos.htb  
+The main website, nothing useful found.  
 <p align="center">
 <img src="https://user-images.githubusercontent.com/21021400/145677725-62437be2-326c-4156-a4f1-056cf65a3d0f.png">
 </p>
 
 ns1.cronos.htb  
+The same apache server page we reached earlier.  
 <p align="center">
 <img src="https://user-images.githubusercontent.com/21021400/145677726-669d2693-4015-4bd3-9fd1-e5db1f99600d.png">
 </p>
 
 admin.cronos.htb  
+A login page.  
 <p align="center">
 <img src="https://user-images.githubusercontent.com/21021400/145677727-1dd27a73-4488-4ab9-84df-3e66d18d86fa.png">
 </p>
@@ -86,9 +91,11 @@ Tried admin:admin and few more default credentials - all failed
 <img src="https://user-images.githubusercontent.com/21021400/145677728-c38155e2-6f05-4b32-a689-73826a4275f3.png">
 </p>
 
+Source code also didn't provide useful information.  
+
 #### SQL Injection
 
-Tried SQL injection
+Tried SQL injection  
 ```
 ' or 1==1-- -
 ```
@@ -136,7 +143,6 @@ root
 <img src="https://user-images.githubusercontent.com/21021400/145677734-876ef1e6-3b9a-4935-96b1-33269212394d.png">
 </p>
 
-
 www-data's groups  
 <p align="center">
 <img src="https://user-images.githubusercontent.com/21021400/145677735-524fc622-ce17-478c-bc2c-a058ed843151.png">
@@ -180,6 +186,8 @@ Laravel is installed in /var/www, checking config files in laravel/.env
 <p align="center">
 <img src="https://user-images.githubusercontent.com/21021400/145677743-be5d86da-253d-47fb-8d83-36e4dd8a01e7.png">
 </p>
+
+So far, all methods tried above failed to escalate the privileges.  
 
 Checking crontab
 <p align="center">
