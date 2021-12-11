@@ -7,11 +7,11 @@
 | Machine Name         | Chatterbox     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.74       |
-| Tools and Techniques |        |
+| Tools and Techniques | nmap, metasploit, msfvenom, Buffer Overflow, CVE, Misconfiguration       |
 
 ## Method
-<p align="center">
-</p>
+Enumerating the hidden services on the machine and exploiting via Buffer Overflow exploit.  
+Accessing root's flag by permissions misconfiguration.  
 
 
 ## Enumeration
