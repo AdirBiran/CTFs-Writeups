@@ -107,11 +107,13 @@ listusers
 </p>
 
 setting password "pass" for all users
+```
 setpassword james pass
 setpassword thomas pass
 setpassword john pass
 setpassword mindy pass
 setpassword mailadmin pass
+```
 <p align="center">
 <img width="124" alt="17" src="https://user-images.githubusercontent.com/21021400/147360673-4db922c1-cd38-466e-9263-4760b44801bc.png">
 </p>
@@ -120,10 +122,12 @@ with the help of this article on the pop commands:
 https://www.atmail.com/blog/pop-101-manual-pop-sessions/
 
 we will login to each of the users with the "pass" password and read the emails on port 110.
+```
 user james
 pass pass
 list (to list all mails)
 retr <X> command to retrieve specific mail
+```
 
 james
 <p align="center">
@@ -184,7 +188,9 @@ however, we're in a restricted bash, meaning many commands will not work.
 
 following this article about escaping restricted bash
 https://www.hacknos.com/rbash-escape-rbash-restricted-shell-escape/
+```
 ssh mindy@10.10.10.51 -t "bash --noprofile"
+```
 <p align="center">
 <img width="234" alt="28" src="https://user-images.githubusercontent.com/21021400/147360687-614c5d2c-c82f-4d02-85f2-498ca74503f6.png">
 </p>
@@ -212,7 +218,9 @@ found inside /opt directory
 
 after thinking for a while on how to target these files easily,
 constructed the following command:
+```
 find /  -type f -perm /002-name "*.py" 2>/dev/null
+```
 looking inside the machine's root directory (/) for any file (-type f) with the world writeable permission (-perm /002) and python extension (-name "*.py), redirecting errors to null (2>/dev/null).
 <p align="center">
 <img width="423" alt="33" src="https://user-images.githubusercontent.com/21021400/147360695-e12d1942-8064-47bd-abd1-0c68848d8316.png">
