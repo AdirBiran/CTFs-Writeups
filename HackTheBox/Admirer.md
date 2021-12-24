@@ -76,7 +76,7 @@ w.cooper@admirer.htb:fgJr6q#S\W:$P (Mail)
 ftpuser:%n?4Wz}R$tTF7 (FTP)  
 admin:w0rdpr3ss01! (Wordpress)  
 
-#### FTP
+#### FTP Enumeration
 
 FTP login as ftpuser  
 <p align="center">
