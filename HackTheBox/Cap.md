@@ -8,7 +8,7 @@
 | Machine Name         | Cap     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.245       |
-| Tools and Techniques | Nmap, Gobuster, Wireshark, Capabilities       |
+| Tools and Techniques | Nmap, Gobuster, Wireshark, Capabilities      |
 
 ## Method
 Enumerating the services and the website to get initial credentials using Wireshark.  
