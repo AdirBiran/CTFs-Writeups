@@ -49,6 +49,8 @@ Endpoints found:
 /host-manager  
 /manager  
 
+#### Manual Enumeration
+
 The website - Port 80  
 <p align="center">
 <img width="960" alt="4" src="https://user-images.githubusercontent.com/21021400/144756222-89636078-578a-4f9f-9f6d-8b0a21928e08.png">
