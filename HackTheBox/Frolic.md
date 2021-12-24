@@ -38,8 +38,6 @@ Found endpoints:
 /dev  
 /backup  
 
-
-
 /test  
 <p align="center">
 <img width="658" alt="4" src="https://user-images.githubusercontent.com/21021400/144066039-ea66cd98-ec94-4d38-95ad-65d9b535fdff.png">
@@ -54,6 +52,8 @@ Running gobuster on dev directory:
 <p align="center">
 <img width="389" alt="2-2" src="https://user-images.githubusercontent.com/21021400/144066033-a08d0ed3-6a51-4f61-96ea-d4e0985421d0.png">
 </p>
+
+#### Manual Enumeration
 
 /dev/test  
 <p align="center">
