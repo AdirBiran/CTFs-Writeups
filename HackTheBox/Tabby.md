@@ -7,7 +7,7 @@
 | Machine Name         | Tabby     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.194       |
-| Tools and Techniques | Nmap, Gobuster, msfvenom, zip2john, john, lxd, Local File Inclusion       |
+| Tools and Techniques | Nmap, Gobuster, msfvenom, zip2john, john, lxd, Local File Inclusion      |
 
 ## Method
 
