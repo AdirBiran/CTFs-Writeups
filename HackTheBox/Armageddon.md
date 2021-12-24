@@ -29,6 +29,8 @@ Ports open: 22 (SSH) and 80 (HTTP)
 <img width="381" alt="2-gobuster" src="https://user-images.githubusercontent.com/21021400/143077272-c05986c6-2363-443f-b6a4-0def48bbce9e.png">
 </p>
 
+#### Manual Enumeration
+
 Manually checking the robots.txt file lead to an intersting file:
 <p align="center">
 <img width="253" alt="3-robots" src="https://user-images.githubusercontent.com/21021400/143077273-21541403-d9a3-4513-aea4-a314a0e867b2.png">
