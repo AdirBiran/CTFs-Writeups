@@ -48,6 +48,8 @@ Second with .php extensions search
 <img width="356" alt="4-gobuster-php" src="https://user-images.githubusercontent.com/21021400/142859650-bebf7991-e9c9-45ad-8811-b3820a31a523.png">
 </p>
 
+#### Manual Enumeration
+
 assets directory did not lead to something interesting.  
 uploads directory wasn't reachable.  
 inc directory had a few php files, thought nothing useful.
