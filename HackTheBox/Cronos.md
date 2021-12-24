@@ -7,7 +7,7 @@
 | Machine Name         | Cronos     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.13       |
-| Tools and Techniques | Nmap, Gobuster, nslookup, dig, SQL Injection, Command Injection, Cronjobs       |
+| Tools and Techniques | Nmap, Gobuster, nslookup, dig, SQL Injection, Command Injection, Cronjobs      |
 
 ## Method
 Enumerating the services and virtual hosts for a login page, exploiting it using SQL injection and getting access with OS Command Injection.  
