@@ -7,10 +7,11 @@
 | Machine Name         | SolidState     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.51       |
-| Tools and Techniques |        |
+| Tools and Techniques | Nmap, Gobuster, Misconfigurations, Data Leakage, Cronjob       |
 
 ## Method
-
+Enumerating the web and mail services on the machine, intitla access by default credentials and leakage of user's password.  
+Escalating the privileges by a modified cronjob python script.  
 
 
 ## Enumeration
@@ -26,6 +27,13 @@ Nmap - all ports
 <img width="264" alt="2" src="https://user-images.githubusercontent.com/21021400/147360652-be628011-0da6-4b85-ad68-0c1d6f05573d.png">
 </p>
 
+Ports open:  
+22 - SSH  
+80 - HTTP  
+110 - POP3  
+119 - NNTP (Network News Transfer Protocol)  
+4555 - James Remote Administration Tools  
+
 #### Gobuster
 
 <p align="center">
@@ -36,6 +44,8 @@ Gobuster with txt and php files
 <p align="center">
 <img width="341" alt="4" src="https://user-images.githubusercontent.com/21021400/147360655-947773e6-b421-4436-8927-d7afc8dbb15f.png">
 </p>
+
+#### Manual Enumeration
 
 The website on port 80  
 <p align="center">
@@ -74,7 +84,7 @@ searchsploit james
 <img width="463" alt="11" src="https://user-images.githubusercontent.com/21021400/147360665-29e93fba-8aa4-4e4d-b8ba-5c8628703194.png">
 </p>
 
-Tried the exploit - but someone needs to log in to activate it.  
+Tried the exploit - but someone needs to login to activate it.  
 However, the content of the exploit revealed default credentials for james tool.  
 root:root  
 <p align="center">
@@ -219,7 +229,7 @@ instersting python file was found inside /opt directory
 After thinking for a while on how to target these files easily,  
 constructed the following command:  
 ```
-find /  -type f -perm /002-name "*.py" 2>/dev/null
+find / -type f -perm /002 -name "*.py" 2>/dev/null
 ```
 looking inside the machine's root directory (/) for any file (-type f) with the world writeable permission (-perm /002) and python extension (-name "\*.py"), redirecting errors to null (2>/dev/null).  
 <p align="center">
