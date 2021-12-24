@@ -7,7 +7,7 @@
 | Machine Name         | Frolic     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.111       |
-| Tools and Techniques | Nmap, Gobuster, fcrackzip, Metasploit, gdb, Buffer Overflow, CVE, Cryptography       |
+| Tools and Techniques | Nmap, Gobuster, fcrackzip, Metasploit, gdb, Buffer Overflow, CVE, Cryptography      |
 
 ## Method
 
