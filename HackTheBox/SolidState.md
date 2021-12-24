@@ -7,7 +7,7 @@
 | Machine Name         | SolidState     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.51       |
-| Tools and Techniques | Nmap, Gobuster, Misconfigurations, Data Leakage, Cronjob       |
+| Tools and Techniques | Nmap, Gobuster, Misconfigurations, Data Leakage, Cronjob      |
 
 ## Method
 Enumerating the web and mail services on the machine, intitla access by default credentials and leakage of user's password.  
