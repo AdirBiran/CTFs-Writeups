@@ -54,6 +54,8 @@ Gobuster - doctors.htb
 <img width="379" alt="6" src="https://user-images.githubusercontent.com/21021400/145070380-c9e21e89-5d7a-4ddc-8973-e5100a97833b.png">
 </p>
 
+#### Manual Enumeration
+
 The website - Port 8089  
 <p align="center">
 <img width="960" alt="7" src="https://user-images.githubusercontent.com/21021400/145070381-e6f7498f-fd12-4714-b8be-a9c87a96b61d.png">
