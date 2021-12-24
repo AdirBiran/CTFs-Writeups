@@ -8,7 +8,7 @@
 | Machine Name         | Argmageddon     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.233       |
-| Tools and Techniques | Nmap, Gobuster, Metasploit, hashcat, snap, CVE       |
+| Tools and Techniques | Nmap, Gobuster, Metasploit, hashcat, snap, CVE      |
 
 ## Method
 Enumerating the website for services and versions and exploiting using Metasploit.  
