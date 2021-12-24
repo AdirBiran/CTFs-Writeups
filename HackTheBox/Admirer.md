@@ -30,7 +30,7 @@ Open ports:
 <p align="center">
 <img width="369" alt="2" src="https://user-images.githubusercontent.com/21021400/144714128-32be6f03-dca4-4783-abc9-94217c20c3d9.png">
 </p>
-
+ 
 Two endpoints found:  
 /images  
 /assets  
