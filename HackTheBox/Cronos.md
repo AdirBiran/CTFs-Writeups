@@ -33,6 +33,8 @@ Gobuster - Port 80
 <img src="https://user-images.githubusercontent.com/21021400/145677719-8e4f9dfc-7820-45e4-94e6-8c32a582ec1c.png">
 </p>
 
+#### Manual Enumeration
+
 The website - Port 80  
 <img src="https://user-images.githubusercontent.com/21021400/145677720-3e99be85-6762-4023-b68f-4ea99ef70811.png">
 <p align="center">
