@@ -7,7 +7,7 @@
 | Machine Name         | Bank     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.29       |
-| Tools and Techniques | Nmap, Gobuster, Burpsuite, Linpeas, Filter bypassing, Misconfiguration       |
+| Tools and Techniques | Nmap, Gobuster, Burpsuite, Linpeas, Filter bypassing, Misconfiguration      |
 
 ## Method
 Enumerating the website and the services, using Burpsuite to bypass status codes.  
