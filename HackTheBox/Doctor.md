@@ -7,7 +7,7 @@
 | Machine Name         | Doctor     |
 | Written by           | Adir Biran       |
 | IP Address           | 10.10.10.209       |
-| Tools and Techniques | Nmap, Gobuster, SSTI, Misconfiguration, Data leakage, CVE       |
+| Tools and Techniques | Nmap, Gobuster, SSTI, Misconfiguration, Data leakage, CVE      |
 
 ## Method
 Enumerating the various services, exploiting SSTI vulnerability to get access on the machine.  
