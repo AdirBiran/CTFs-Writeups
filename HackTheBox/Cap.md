@@ -38,7 +38,7 @@ Ports open: 21 (FTP), 22 (SSH) and 80 (HTTP)
 /netstat  
 /ip  
 
-#### Website
+#### Website Enumeration
 
 The main dashboard  
 <p align="center">
